@@ -1,0 +1,9 @@
+Actividades
+
+Ahora te toca practicar poniendo tus conocimientos a prueba, para practicar más los conceptos de herencia de clases en JavaScript:
+
+Crear una tercera subclase de la clase "Figura", por ejemplo "Círculo", que tenga una propiedad "radio" y un método "calcularPerímetro".
+Añadir un método a la clase "Figura" que calcule el área de la figura y que sea implementado por cada subclase.
+Crear un botón en la página HTML que, al hacer clic, cambie el color de los cuadrados dibujados en la página.
+Crear una función que dibuje un conjunto aleatorio de cuadrados y círculos en la página HTML, con colores y tamaños generados al azar.
+Añadir una propiedad estática a la clase "Figura" que lleve la cuenta de cuántas instancias de figuras se han creado, y mostrar esa cantidad en la página HTML.

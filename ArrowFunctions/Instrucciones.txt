@@ -1,0 +1,8 @@
+Pruebe cada uno de los ejercicios proporcionados y analice su funcionamiento.
+Elabore un programa en HTML con JavaScipt que utilice las siguientes funciones flecha mostrando su resultado en pantalla:
+Calcular x1 y x2 utilizando la formula general de solución de ecuaciones de segundo grado con 3 incógnitas, dados los valores de a,b,c.
+Que dado un vector de números devuelva su media geométrica.
+Que dado un vector de números devuelva el valor mayor.
+Que dado un vector de números regrese el menor.
+Que dado un vector de números y un numero a buscar devuelva el numero de coincidencias que encontró o -1 si no encontró ninguno.
+Elaborar un reporte en formato PDF con los ejercicios y los programas que se te solicitaron, mostrando el código fuente, y las pantallas de salida de la ejecución de los mis, no olvides poner al inicio la hoja de presentación.

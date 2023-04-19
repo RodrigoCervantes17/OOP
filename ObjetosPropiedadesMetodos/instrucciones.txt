@@ -1,0 +1,6 @@
+Actividades para desarrollar
+
+1.       Revisa todo el contenido de esta pagina y realiza cada uno de los ejercicios que se te sugieren, agrega el código fuente, y la salida de cada programa, no olvides poner una portada(datos de la universidad, de la facultad de la materia y tuyos), y súbelo a esta plataforma en formato pdf para facilitar tu revisión.
+
+2.       Agrega también unas conclusiones donde describas que es la poo en javascript, y a que se refiere con la herencia, encapsulación y el polimorfismo en este contexto.
+
