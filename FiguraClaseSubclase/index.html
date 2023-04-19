@@ -14,16 +14,24 @@
 
         margin: 10px;
       }
+      .circle{
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        background-color: solid black;
+      }
     </style>
   </head>
 
   <body>
     <div id="cuadrados"></div>
+  <button id="cambiar-color" onclick="cambiarColor()">Cambiar Color</button>
+
+    <div id="cuadrados"></div>
 
     <script>
       // Definimos la superclase Figura
-
-      class Figura {
+class Figura {
   constructor(color) {
     this.color = color;
   }
@@ -37,86 +45,92 @@
   }
 }
 
+// Definimos la subclase Cuadrado
+class Cuadrado extends Figura {
+  constructor(color, lado) {
+    super(color);
+    this.lado = lado;
+  }
 
-      // Definimos la subclase Cuadrado
+  dibujar() {
+    console.log(
+      `Dibujando cuadrado de color ${this.color} y lado ${this.lado}`
+    );
 
-      class Cuadrado extends Figura {
-        constructor(color, lado) {
-          super(color);
+    let squareDiv = document.createElement("div");
+    squareDiv.className = "square";
+    squareDiv.style.backgroundColor = this.color;
+    squareDiv.style.width = this.lado + "px";
+    squareDiv.style.height = this.lado + "px";
+    document.getElementById("cuadrados").appendChild(squareDiv);
+  }
 
-          this.lado = lado;
-        }
+  calcularArea() {
+    return this.lado * this.lado;
+  }
 
-        dibujar() {
-          console.log(
-            `Dibujando cuadrado de color ${this.color} y lado ${this.lado}`
-          );
+  cambiarColor() {
+    let colores = ["red", "blue", "green", "orange", "purple", "pink"];
+    let nuevoColor = colores[Math.floor(Math.random() * colores.length)];
+    document.querySelectorAll(".square").forEach((cuadrado) => {
+      cuadrado.style.backgroundColor = nuevoColor;
+    });
+  }
+}
 
-          let squareDiv = document.createElement("div");
-
-          squareDiv.className = "square";
-
-          squareDiv.style.backgroundColor = this.color;
-
-          squareDiv.style.width = this.lado + "px";
-
-          squareDiv.style.height = this.lado + "px";
-
-          document.getElementById("cuadrados").appendChild(squareDiv);
-        }
-
-        calcularArea() {
-          return this.lado * this.lado;
-        }
-      }
-      class Circulo extends Figura {
+// Definimos la subclase Circulo
+class Circulo extends Figura {
   constructor(color, radio) {
     super(color);
     this.radio = radio;
   }
 
   dibujar() {
-    let circleDiv = document.createElement("div");
-    circleDiv.className = "circle";
-    circleDiv.style.backgroundColor = this.color;
-    circleDiv.style.width = this.radio * 2 + "px";
-    circleDiv.style.height = this.radio * 2 + "px";
-    circleDiv.style.borderRadius = this.radio + "px";
-    document.getElementById("cuadrados").appendChild(circleDiv);
+    let CircleDiv = document.createElement("div");
+    CircleDiv.className = "circle";
+    CircleDiv.style.width = this.radio * 2 + "px";
+    CircleDiv.style.height = this.radio * 2 + "px";
+    CircleDiv.style.borderRadius = "50%";
+    CircleDiv.style.backgroundColor = this.color;
+    document.getElementById("cuadrados").appendChild(CircleDiv);
   }
 
   calcularPerimetro() {
-    return Math.PI * this.radio * 2;
+    return 2 * Math.PI * this.radio;
   }
+  cambiarColor() {
+    let colores = ["red", "blue", "green", "orange", "purple", "pink"];
+    let nuevoColor = colores[Math.floor(Math.random() * colores.length)];
+    document.querySelectorAll(".circle").forEach((circle) => {
+      circle.style.backgroundColor = nuevoColor;})
+}
 }
 
+// Creamos una instancia de la clase Cuadrado y la dibujamos en la página
+let miCuadrado = new Cuadrado("red", 50);
+miCuadrado.dibujar();
 
-      // Creamos una instancia de la clase Cuadrado y la dibujamos en la página
+// Creamos otra instancia de la clase Cuadrado con diferentes propiedades y la dibujamos en la página
+let otroCuadrado = new Cuadrado("blue", 75);
+otroCuadrado.dibujar();
 
-      let miCuadrado = new Cuadrado("red", 50);
+// Calculamos el área del segundo cuadrado y lo mostramos en la consola
+let area = otroCuadrado.calcularArea();
+console.log(`El área del cuadrado azul es ${area}`);
 
-      miCuadrado.dibujar();
+// Función que se ejecuta al hacer clic en el botón "Cambiar Color"
+function cambiarColor() {
+  miCuadrado.cambiarColor();
+  otroCuadrado.cambiarColor();
+  circulo.cambiarColor();
+  circulo2.cambiarColor();
+}
+// Dibujar los círculos.
+let circulo = new Circulo("blue", 50)
+circulo.dibujar()
+let circulo2 = new Circulo("green", 60)
+circulo2.dibujar()
 
-      // Creamos otra instancia de la clase Cuadrado con diferentes propiedades y la dibujamos en la página
-
-      let otroCuadrado = new Cuadrado("blue", 75);
-
-      otroCuadrado.dibujar();
-
-      // Calculamos el área del segundo cuadrado y lo mostramos en la consola
-
-      let area = otroCuadrado.calcularArea();
-
-      console.log(`El área del cuadrado azul es ${area}`);
-      
-      // Creamos una instancia de la clase círculo con diferentes propiedades.
-      let circulo1 = new Circulo("blue",50);
-      circulo1.dibujar()
-      //Creamos otra instancia de clase círculo.
-      let circulo2 = new Circulo("red",70);
-      circulo2.dibujar()
-      //Conseguimos el área del segundo círculo, solo para ejemplificar en consola.
-      
     </script>
   </body>
 </html>
