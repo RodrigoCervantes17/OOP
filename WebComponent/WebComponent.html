@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculadora</title>
+    <script>
+      // Definimos el Web Component
+      class Calculadora extends HTMLElement {
+        constructor() {
+          super();
+          // Creamos el Shadow DOM
+          const template = document.createElement("template");
+          // Creamos el HTML y CSS dentro del Shadow DOM
+          template.innerHTML = `
+          <style>
+            .calculator {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              grid-gap: 10px;
+              padding: 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+            }
+            button {
+              padding: 10px;
+              font-size: 18px;
+              border-radius: 5px;
+              border: none;
+              outline: none;
+              background-color: #f2f2f2;
+            }
+            button:hover {
+              background-color: #ddd;
+            }
+            button:active {
+              background-color: #bbb;
+            }
+          </style>
+          <div class="calculator">
+            <button id="clear">C</button>
+            <button id="backspace">&larr;</button>
+            <button id="divide">/</button>
+            <button id="multiply">*</button>
+            <button id="seven">7</button>
+            <button id="eight">8</button>
+            <button id="nine">9</button>
+            <button id="subtract">-</button>
+            <button id="four">4</button>
+            <button id="five">5</button>
+            <button id="six">6</button>
+            <button id="add">+</button>
+            <button id="one">1</button>
+            <button id="two">2</button>
+            <button id="three">3</button>
+            <button id="equals">=</button>
+            <button id="decimal">.</button>
+            <button id="zero">0</button>
+          </div>
+        `;
+          // Obtenemos los elementos del DOM
+          // Creamos las referencias a los elementos de la calculadora
+          this._clearButton = null;
+          this._backspaceButton = null;
+          this._divideButton = null;
+          this._multiplyButton = null;
+          this._subtractButton = null;
+          this._addButton = null;
+          this._equalsButton = null;
+          this._decimalButton = null;
+          this._output = null;
+
+          // Agregamos el template al shadow DOM
+          const shadowRoot = this.attachShadow({ mode: "open" });
+          shadowRoot.appendChild(template.content.cloneNode(true));
+        }
+
+        connectedCallback() {
+          // Obtenemos las referencias a los elementos de la calculadora
+          this._clearButton = this.shadowRoot.getElementById("clear");
+          this._backspaceButton = this.shadowRoot.getElementById("backspace");
+          this._divideButton = this.shadowRoot.getElementById("divide");
+          this._multiplyButton = this.shadowRoot.getElementById("multiply");
+          this._subtractButton = this.shadowRoot.getElementById("subtract");
+          this._addButton = this.shadowRoot.getElementById("add");
+          this._equalsButton = this.shadowRoot.getElementById("equals");
+          this._decimalButton = this.shadowRoot.getElementById("decimal");
+          this._output = document.createElement("div");
+          this._output.style.gridArea = "1 / 1 / 2 / 5";
+          this._output.style.textAlign = "right";
+          this._output.style.padding = "10px";
+          this._output.style.border = "1px solid black";
+          this.shadowRoot
+            .querySelector(".calculator")
+            .appendChild(this._output);
+          this.shadowRoot
+            .querySelectorAll(".calculator button")
+            .forEach((button) => {
+              if (!isNaN(button.textContent)) {
+                button.addEventListener(
+                  "click",
+                  () => (this._output.textContent += button.textContent)
+                );
+              }
+            });
+
+          // Agregamos los event listeners a los botones de la calculadora
+          this._clearButton.addEventListener(
+            "click",
+            () => (this._output.textContent = "")
+          );
+          this._backspaceButton.addEventListener(
+            "click",
+            () =>
+              (this._output.textContent = this._output.textContent.slice(0, -1))
+          );
+          this._divideButton.addEventListener(
+            "click",
+            () => (this._output.textContent += "/")
+          );
+          this._multiplyButton.addEventListener(
+            "click",
+            () => (this._output.textContent += "*")
+          );
+          this._subtractButton.addEventListener(
+            "click",
+            () => (this._output.textContent += "-")
+          );
+          this._addButton.addEventListener(
+            "click",
+            () => (this._output.textContent += "+")
+          );
+          this._equalsButton.addEventListener("click", () => {
+            try {
+              this._output.textContent = eval(this._output.textContent);
+            } catch (e) {
+              this._output.textContent = "Error";
+            }
+          });
+          this._decimalButton.addEventListener("click", () => {
+            if (!this._output.textContent.includes(".")) {
+              this._output.textContent += ".";
+            }
+          });
+        }
+      }
+
+      // Registramos el Web Component en el DOM
+      customElements.define("mi-calculadora", Calculadora);
+
+      class Calculator2 extends HTMLElement {
+        constructor() {
+          super();
+
+          // Creamos los elementos de la calculadora
+          const template = document.createElement("template");
+          template.innerHTML = `
+      <style>
+      .calculator {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+        padding: 10px;
+        border: 3px solid #3F63F4;
+        width: 300px;
+        background-color: #F4F4F4;
+        border-radius: 20px;
+        font-family: 'Open Sans';
+      }
+      
+      .calculator div {
+        background-color: #9c36f5;
+        height: 40px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+      }
+      
+      .calculator button {
+        font-size: 24px;
+        padding: 20px;
+        background-color: #9c35F4;
+        color: white;
+        border-style: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+      }
+      
+      .calculator button:hover {
+        background-color: #9c40B8;
+      }
+      </style>
+      
+      <div class="calculator">
+        <button id="clear">C</button>
+        <button id="backspace">←</button>
+        <button id="divide">/</button>
+        <button id="multiply">*</button>
+        <button id="seven">7</button>
+        <button id="eight">8</button>
+        <button id="nine">9</button>
+        <button id="subtract">-</button>
+        <button id="four">4</button>
+        <button id="five">5</button>
+        <button id="six">6</button>
+        <button id="add">+</button>
+        <button id="one">1</button>
+        <button id="two">2</button>
+        <button id="three">3</button>
+        <button id="equals">=</button>
+        <button id="decimal">.</button>
+        <button id="zero">0</button>
+      </div>
+    `;
+
+          // Creamos las referencias a los elementos de la calculadora
+          this._clearButton = null;
+          this._backspaceButton = null;
+          this._divideButton = null;
+          this._multiplyButton = null;
+          this._subtractButton = null;
+          this._addButton = null;
+          this._equalsButton = null;
+          this._decimalButton = null;
+          this._output = null;
+
+          // Agregamos el template al shadow DOM
+          const shadowRoot = this.attachShadow({ mode: "open" });
+          shadowRoot.appendChild(template.content.cloneNode(true));
+        }
+
+        connectedCallback() {
+          // Obtenemos las referencias a los elementos de la calculadora
+          this._clearButton = this.shadowRoot.getElementById("clear");
+          this._backspaceButton = this.shadowRoot.getElementById("backspace");
+          this._divideButton = this.shadowRoot.getElementById("divide");
+          this._multiplyButton = this.shadowRoot.getElementById("multiply");
+          this._subtractButton = this.shadowRoot.getElementById("subtract");
+          this._addButton = this.shadowRoot.getElementById("add");
+          this._equalsButton = this.shadowRoot.getElementById("equals");
+          this._decimalButton = this.shadowRoot.getElementById("decimal");
+          this._output = document.createElement("div");
+          this._output.style.gridArea = "1 / 1 / 2 / 5";
+          this._output.style.textAlign = "right";
+          this._output.style.padding = "10px";
+          this._output.style.border = "1px solid black";
+          this.shadowRoot
+            .querySelector(".calculator")
+            .appendChild(this._output);
+          this.shadowRoot
+            .querySelectorAll(".calculator button")
+            .forEach((button) => {
+              if (!isNaN(button.textContent)) {
+                button.addEventListener(
+                  "click",
+                  () => (this._output.textContent += button.textContent)
+                );
+              }
+            });
+
+          // Agregamos los event listeners a los botones de la calculadora
+          this._clearButton.addEventListener(
+            "click",
+            () => (this._output.textContent = "")
+          );
+          this._backspaceButton.addEventListener(
+            "click",
+            () =>
+              (this._output.textContent = this._output.textContent.slice(0, -1))
+          );
+          this._divideButton.addEventListener(
+            "click",
+            () => (this._output.textContent += "/")
+          );
+          this._multiplyButton.addEventListener(
+            "click",
+            () => (this._output.textContent += "*")
+          );
+          this._subtractButton.addEventListener(
+            "click",
+            () => (this._output.textContent += "-")
+          );
+          this._addButton.addEventListener(
+            "click",
+            () => (this._output.textContent += "+")
+          );
+          this._equalsButton.addEventListener("click", () => {
+            try {
+              this._output.textContent = eval(this._output.textContent);
+            } catch (e) {
+              this._output.textContent = "Error";
+            }
+          });
+          this._decimalButton.addEventListener("click", () => {
+            if (!this._output.textContent.includes(".")) {
+              this._output.textContent += ".";
+            }
+          });
+        }
+      }
+
+      // Registramos el Web Component
+      customElements.define("op-calculator", Calculator2);
+
+      function change_calculator() {
+        let simple = document.getElementById("simple");
+        let cientifica = document.getElementById("cientifica");
+
+        if (simple.style.display == "grid") {
+          simple.style.display = "none";
+          cientifica.style.display = "grid";
+        } else {
+          simple.style.display = "grid";
+          cientifica.style.display = "none";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <mi-calculadora id="simple" style="display: grid"></mi-calculadora>
+    <op-calculator id="cientifica" style="display: none"></op-calculator>
+    <br />
+    <button id="change" onclick="change_calculator()">
+      Cambiar calculadora
+    </button>
+  </body>
+</html>

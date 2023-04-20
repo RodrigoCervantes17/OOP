@@ -1,0 +1,7 @@
+1.       Agrega un getter y unos setter  para asignarle una fecha de nacimiento a la clase persona, la cual se pueda cambiar también.
+
+2.       Agrega un getter para obtener la edad de la persona (calculada en razón de la fecha de nacimiento)
+
+3.       Sube el reporte en formato PDF para facilitar su revisión, que tenga una portada, el código fuente y las pantallas de salida que muestren el resultado esperado.
+
+ 

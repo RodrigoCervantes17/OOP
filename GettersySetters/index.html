@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Persona {
+        constructor(nombre, fechaNacimiento) {
+          this._nombre = nombre;
+          this._fechaNacimiento = fechaNacimiento;
+        }
+
+        // getter para obtener el nombre
+        get nombre() {
+          return this._nombre;
+        }
+
+        // setter para modificar el nombre
+        set nombre(nuevoNombre) {
+          this._nombre = nuevoNombre;
+        }
+
+        // getter para obtener la fecha de nacimiento
+        get fechaNacimiento() {
+          return this._fechaNacimiento;
+        }
+
+        // setter para modificar la fecha de nacimiento
+        set fechaNacimiento(nuevaFechaNacimiento) {
+          this._fechaNacimiento = nuevaFechaNacimiento;
+        }
+
+        // getter para obtener la edad
+        get edad() {
+          const diffTime = Math.abs(new Date() - this._fechaNacimiento);
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          const diffYears = Math.floor(diffDays / 365);
+          return diffYears;
+        }
+      }
+
+      // creando una instancia de Persona
+      const persona1 = new Persona("Juan", new Date("1998-04-20"));
+
+      // obteniendo la fecha de nacimiento y la edad usando los getters
+      console.log(persona1.fechaNacimiento); // Tue Apr 20 1998 00:00:00 GMT-0500 (Central Daylight Time)
+      console.log(persona1.edad); // 25
+
+      // modificando la fecha de nacimiento y el nombre usando los setters
+      persona1.fechaNacimiento = new Date("1991-03-15");
+      persona1.nombre = "María";
+
+      // obteniendo la fecha de nacimiento y el nombre actualizados
+      console.log(persona1.fechaNacimiento); // Sun Mar 15 1991 00:00:00 GMT-0600 (Central Standard Time)
+      console.log(persona1.edad); // 32
+      console.log(persona1.nombre); // "María"
+    </script>
+  </body>
+</html>
