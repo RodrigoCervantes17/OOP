@@ -24,19 +24,27 @@
   </head>
 
   <body>
+    <button onclick="dibujarFormasAleatorias()">Dibujar formas aleatorias</button>
+
     <div id="cuadrados"></div>
   <button id="cambiar-color" onclick="cambiarColor()">Cambiar Color</button>
-
+  <button id="CalcularCantidad" onclick="CalcularCantidad()">Calcular cantidad de elementos.</button>
+  </body>
+  <div id= "cantidadfiguras"></div>
     <div id="cuadrados"></div>
 
     <script>
       // Definimos la superclase Figura
 class Figura {
+  static cantidadDeFiguras = 0; // propiedad estática
   constructor(color) {
     this.color = color;
+    Figura.cantidadDeFiguras++;
+    
   }
+  
 
-  dibujar() {
+  dibujar(){
     console.log(`Dibujando figura de color ${this.color}`);
   }
 
@@ -44,6 +52,7 @@ class Figura {
     console.log("Este método debe ser implementado en las subclases");
   }
 }
+
 
 // Definimos la subclase Cuadrado
 class Cuadrado extends Figura {
@@ -131,6 +140,33 @@ circulo.dibujar()
 let circulo2 = new Circulo("green", 60)
 circulo2.dibujar()
 
+function CalcularCantidad(){
+let cantidadDiv = document.getElementById("cantidadfiguras")
+cantidadDiv.textContent = `Cantidad de figuras: ${Figura.cantidadDeFiguras}`;
+document.body.appendChild(cantidadDiv);}
+function dibujarFormasAleatorias() {
+  const colores = ["red", "blue", "green", "orange", "purple", "pink"];
+  const tamanos = [25, 50, 75, 100];
+
+  for (let i = 0; i < 10; i++) {
+    let figura;
+    let tipoFigura = Math.floor(Math.random() * 2); // 0 para cuadrado, 1 para círculo
+    let color = colores[Math.floor(Math.random() * colores.length)];
+    let tamaño = tamanos[Math.floor(Math.random() * tamanos.length)];
+
+    if (tipoFigura === 0) {
+      figura = new Cuadrado(color, tamaño);
+      Figura.cantidadDeFiguras++;
+    } else {
+      figura = new Circulo(color, tamaño);
+      Figura.cantidadDeFiguras++;
+    }
+
+    figura.dibujar();
+    console.log("Sí está chambeando")
+  }
+}
     </script>
+    
   </body>
 </html>
