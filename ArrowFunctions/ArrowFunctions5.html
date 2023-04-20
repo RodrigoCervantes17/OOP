@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Buscar número en vector</title>
+  </head>
+  <body>
+    <script>
+      const numeros = [5, 3, 8, 2, 9, 5, 1];
+      const buscarNumero = (vector, numero) => {
+        let coincidencias = 0;
+        for (let i = 0; i < vector.length; i++) {
+          if (vector[i] === numero) {
+            coincidencias++;
+          }
+        }
+        return coincidencias === 0 ? -1 : coincidencias;
+      }
+      const numeroBuscado = 5;
+      const coincidencias = buscarNumero(numeros, numeroBuscado);
+      document.write(`El número ${numeroBuscado} se encontró ${coincidencias} veces.`);
+    </script>
+  </body>
+</html>

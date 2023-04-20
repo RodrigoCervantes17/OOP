@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Calcular x1 y x2 de ecuación de segundo grado con 3 incógnitas</title>
+  </head>
+  <body>
+    <h1>Calcular x1 y x2 de ecuación de segundo grado con 3 incógnitas</h1>
+    <form>
+      <label for="a">Ingrese el valor de a:</label>
+      <input type="number" id="a" name="a"><br>
+      <label for="b">Ingrese el valor de b:</label>
+      <input type="number" id="b" name="b"><br>
+      <label for="c">Ingrese el valor de c:</label>
+      <input type="number" id="c" name="c"><br>
+      <button type="button" onclick="calcular()">Calcular x1 y x2</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+      const calcularDiscriminante = (a, b, c) => (b**2) - (4*a*c);
+
+      const calcularRaices = (a, b, c, discriminante) => {
+        let x1 = (-b + Math.sqrt(discriminante)) / (2*a);
+        let x2 = (-b - Math.sqrt(discriminante)) / (2*a);
+        return [x1, x2];
+      };
+
+      const calcular = () => {
+        const a = parseInt(document.getElementById("a").value);
+        const b = parseInt(document.getElementById("b").value);
+        const c = parseInt(document.getElementById("c").value);
+
+        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+          document.getElementById("resultado").innerHTML = "Por favor, ingrese valores numéricos para a, b y c.";
+        } else {
+          const discriminante = calcularDiscriminante(a, b, c);
+          const raices = calcularRaices(a, b, c, discriminante);
+
+          document.getElementById("resultado").innerHTML = `Las raices son: x1=${raices[0]}, x2=${raices[1]}`;
+        }
+      };
+    </script>
+  </body>
+</html>

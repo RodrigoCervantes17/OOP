@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Encontrar el Valor Menor en un Vector de Números</title>
+  </head>
+  <body>
+    <h1>Encontrar el Valor Menor en un Vector de Números</h1>
+    <form>
+      <label for="numeros">Ingrese los números separados por comas:</label>
+      <input type="text" id="numeros" name="numeros"><br>
+      <button type="button" onclick="encontrarMenor()">Encontrar Valor Menor</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+      const encontrarMenor = () => {
+        const numerosString = document.getElementById("numeros").value;
+        const numerosArray = numerosString.split(",");
+        const numeros = numerosArray.map(num => parseFloat(num));
+
+        const menor = Math.min(...numeros);
+
+        document.getElementById("resultado").innerHTML = `El valor menor de los números ${numerosString} es ${menor}`;
+      };
+    </script>
+  </body>
+</html>

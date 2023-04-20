@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Media Geométrica de un Vector de Números</title>
+  </head>
+  <body>
+    <h1>Media Geométrica de un Vector de Números</h1>
+    <form>
+      <label for="numeros">Ingrese los números separados por comas:</label>
+      <input type="text" id="numeros" name="numeros"><br>
+      <button type="button" onclick="calcularMedia()">Calcular Media Geométrica</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+      const calcularMedia = () => {
+        const numerosString = document.getElementById("numeros").value;
+        const numerosArray = numerosString.split(",");
+        const numeros = numerosArray.map(num => parseFloat(num));
+
+        const producto = numeros.reduce((acc, num) => acc * num);
+        const mediaGeometrica = Math.pow(producto, 1 / numeros.length);
+
+        document.getElementById("resultado").innerHTML = `La media geométrica de los números ${numerosString} es ${mediaGeometrica.toFixed(2)}`;
+      };
+    </script>
+  </body>
+</html>

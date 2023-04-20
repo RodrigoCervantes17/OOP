@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Encontrar el Valor Mayor en un Vector de Números</title>
+  </head>
+  <body>
+    <h1>Encontrar el Valor Mayor en un Vector de Números</h1>
+    <form>
+      <label for="numeros">Ingrese los números separados por comas:</label>
+      <input type="text" id="numeros" name="numeros"><br>
+      <button type="button" onclick="encontrarMayor()">Encontrar Valor Mayor</button>
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+      const encontrarMayor = () => {
+        const numerosString = document.getElementById("numeros").value;
+        const numerosArray = numerosString.split(",");
+        const numeros = numerosArray.map(num => parseFloat(num));
+
+        const mayor = Math.max(...numeros);
+
+        document.getElementById("resultado").innerHTML = `El valor mayor de los números ${numerosString} es ${mayor}`;
+      };
+    </script>
+  </body>
+</html>
