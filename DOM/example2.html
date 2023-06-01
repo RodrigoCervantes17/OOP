@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+                <title>Agregar a una lista</title>
+
+                <style>
+
+                               .container {
+
+                                               display: flex;
+
+                                               flex-direction: column;
+
+                                               align-items: center;
+
+                                               margin-top: 50px;
+
+                               }
+
+ 
+
+                               input[type="text"] {
+
+                                               margin-bottom: 20px;
+
+                                               padding: 10px;
+
+                                               font-size: 16px;
+
+                                               border-radius: 5px;
+
+                                               border: 1px solid #ccc;
+
+                               }
+
+ 
+
+                               button.add-btn {
+
+                                               padding: 10px;
+
+                                               font-size: 16px;
+
+                                               border-radius: 5px;
+
+                                               border: none;
+
+                                               background-color: #008CBA;
+
+                                               color: #fff;
+
+                                               cursor: pointer;
+
+                               }
+
+ 
+
+                               ul {
+
+                                               list-style-type: none;
+
+                                               padding: 0;
+
+                                               margin: 0;
+
+                                               text-align: center;
+
+                               }
+
+ 
+
+                               li {
+
+                                               margin-bottom: 5px;
+
+                                               font-size: 18px;
+
+                                               display: flex;
+
+                                               justify-content: space-between;
+
+                                               align-items: center;
+
+                               }
+
+ 
+
+                               button.remove-btn {
+
+                                               background-color: #FF4136;
+
+                                               color: #fff;
+
+                                               border: none;
+
+                                               padding: 5px 10px;
+
+                                               font-size: 16px;
+
+                                               border-radius: 5px;
+
+                                               cursor: pointer;
+
+                               }
+
+ 
+
+                </style>
+
+</head>
+
+<body>
+
+                <div class="container">
+
+                               <label for="name">Ingresa un nombre:</label>
+
+                               <input type="text" id="name" placeholder="Nombre">
+
+                                <!-- Modificamos la clase del botón para poder diferenciarlo de los otros -->
+
+                               <button onclick="addName()" class="add-btn">Agregar</button>
+
+                               <ul id="nameList"></ul>
+
+                </div>
+
+ 
+
+                <script>
+
+                               function addName() {
+
+                                               const nameInput = document.getElementById("name");
+
+                                               const nameList = document.getElementById("nameList");
+
+ 
+
+                                               // Creamos un nuevo elemento de lista y le asignamos el valor del input
+
+                                               const newName = document.createElement("li");
+
+                                               newName.innerText = nameInput.value;
+
+ 
+
+                                               // Creamos el botón para eliminar el elemento
+
+                                               const removeBtn = document.createElement("button");
+
+                                               removeBtn.innerText = "X";
+
+                                               removeBtn.classList.add("remove-btn");
+
+ 
+
+                                               // Agregamos el botón al elemento de lista
+
+                                               newName.appendChild(removeBtn);
+
+ 
+
+                                               // Agregamos el nuevo elemento a la lista
+
+                                               nameList.appendChild(newName);
+
+ 
+
+                                               // Limpiamos el input
+
+                                               nameInput.value = "";
+
+ 
+
+                                               // Agregamos un evento click al botón de eliminar para que elimine el elemento correspondiente
+
+                                               removeBtn.addEventListener("click", function() {
+
+                                                               nameList.removeChild(newName);
+
+                                               });
+
+                               }
+
+                </script>
+
+</body>
+
+</html>

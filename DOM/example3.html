@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+                <title>Agregar a una lista</title>
+
+                <style>
+
+                               .container {
+
+                                               display: flex;
+
+                                               flex-direction: column;
+
+                                               align-items: center;
+
+                                               margin-top: 50px;
+
+                               }
+
+ 
+
+                               input[type="text"] {
+
+                                               margin-bottom: 20px;
+
+                                               padding: 10px;
+
+                                               font-size: 16px;
+
+                                               border-radius: 5px;
+
+                                               border: 1px solid #ccc;
+
+                               }
+
+ 
+
+                               button.add-btn {
+
+                                               padding: 10px;
+
+                                               font-size: 16px;
+
+                                               border-radius: 5px;
+
+                                               border: none;
+
+                                               background-color: #008CBA;
+
+                                               color: #fff;
+
+                                               cursor: pointer;
+
+                               }
+
+ 
+
+                               ul {
+
+                                               list-style-type: none;
+
+                                               padding: 0;
+
+                                               margin: 0;
+
+                                               text-align: center;
+
+                               }
+
+ 
+
+                               li {
+
+                                               margin-bottom: 5px;
+
+                                               font-size: 18px;
+
+                                               display: flex;
+
+                                               justify-content: space-between;
+
+                                               align-items: center;
+
+                               }
+
+ 
+
+                               button.remove-btn {
+
+                                               background-color: #FF4136;
+
+                                               color: #fff;
+
+                                               border: none;
+
+                                               padding: 5px 10px;
+
+                                               font-size: 16px;
+
+                                               border-radius: 5px;
+
+                                               cursor: pointer;
+
+                               }
+
+ 
+
+                               .highlight {
+
+                                               background-color: yellow;
+
+                               }
+
+                </style>
+
+</head>
+
+<body>
+
+                <div class="container">
+
+                               <label for="name">Ingresa un nombre:</label>
+
+                               <input type="text" id="name" placeholder="Nombre">
+
+                               <button onclick="addName()" class="add-btn">Agregar</button>
+
+                               <label for="searchName">Buscar un nombre:</label>
+
+                               <input type="text" id="searchName" placeholder="Nombre a buscar">
+
+                               <button onclick="highlightNames()" class="add-btn">Buscar</button>
+
+                               <ul id="nameList"></ul>
+
+                </div>
+
+ 
+
+                <script>
+
+                               function addName() {
+
+                                               const nameInput = document.getElementById("name");
+
+                                               const nameList = document.getElementById("nameList");
+
+ 
+
+                                               // Creamos un nuevo elemento de lista y le asignamos el valor del input
+
+                                               const newName = document.createElement("li");
+
+                                               newName.innerText = nameInput.value;
+
+ 
+
+                                               // Creamos el botón para eliminar el elemento
+
+                                               const removeBtn = document.createElement("button");
+
+                                               removeBtn.innerText = "X";
+
+                                               removeBtn.classList.add("remove-btn");
+
+ 
+
+                                               // Agregamos el botón al elemento de lista
+
+                                               newName.appendChild(removeBtn);
+
+ 
+
+                                               // Agregamos el nuevo elemento a la lista
+
+                                               nameList.appendChild(newName);
+
+ 
+
+                                               // Limpiamos el input
+
+                                               nameInput.value = "";
+
+ 
+
+                                               // Agregamos un evento click al botón de eliminar para que elimine el elemento correspondiente
+
+                                               removeBtn.addEventListener("click", function() {
+
+                                                               nameList.removeChild(newName);
+
+                                               });
+
+                               }
+
+ 
+
+                               function highlightNames() {
+
+                                               const searchInput = document.getElementById("searchName");
+
+                                               const nameList = document.getElementById("nameList");
+
+                                               const names = nameList.getElementsByTagName("li");
+
+ 
+
+                                               // Limpiamos cualquier resaltado previo
+
+                                               for (let i = 0; i < names.length; i++) {
+
+                                                               names[i].classList.remove("highlight");
+
+                                               }
+
+ 
+
+                                               let matchFound = false;
+
+                                               // Recorremos los elementos de la lista y resaltamos los que coinciden con la búsqueda
+
+                                               for (let i = 0; i < names.length; i++) {
+
+                                                               const name = names[i].innerText;
+
+                                                               if (name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+
+                                                                               names[i].classList.add("highlight");
+
+                                                                               matchFound = true;
+
+                                                               }
+
+                                               }
+
+ 
+
+                                               // Si no se encontró ninguna coincidencia, mostramos una alerta
+
+                                               if (!matchFound) {
+
+                                                               alert("No se encontró ninguna coincidencia.");
+
+                                               }
+
+                               }
+
+                </script>
+
+</body>
+
+</html>

@@ -7,7 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>polimorfismo en js</h1>
+    <h2>polimorfismo en js</h2>
 
     <script>
       function calcularArea(figura) {
@@ -17,7 +17,7 @@
           return Math.PI * figura.radio * figura.radio;
         } else if (figura instanceof Triangulo) {
           return (figura.base * figura.altura) / 2;
-        } else if (figura instanceof Rectangulo) {
+          } else if (figura instanceof Rectangulo) {
           return figura.lado1 * figura.lado2;
         } else {
           throw new Error("Figura no reconocida");

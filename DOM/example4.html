@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar a una lista</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        input[type="text"] {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        button.add-btn {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #008CBA;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        
+        li {
+            margin-bottom: 5px;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        button.remove-btn {
+            background-color: #FF4136;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .highlight {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label for="name">Ingresa un nombre:</label>
+        <input type="text" id="name" placeholder="Nombre">
+        
+        <label for="address">Ingresa una dirección:</label>
+        <input type="text" id="address" placeholder="Dirección">
+        
+        <label for="phone">Ingresa un teléfono:</label>
+        <input type="text" id="phone" placeholder="Teléfono">
+        
+        <button onclick="addName()" class="add-btn">Agregar</button>
+        
+        <label for="searchName">Buscar un nombre:</label>
+        <input type="text" id="searchName" placeholder="Nombre a buscar">
+        
+        <button onclick="highlightNames()" class="add-btn">Buscar</button>
+        
+        <ul id="nameList"></ul>
+    </div>
+    
+    <script>
+        function addName() {
+            const nameInput = document.getElementById("name");
+            const addressInput = document.getElementById("address");
+            const phoneInput = document.getElementById("phone");
+            const nameList = document.getElementById("nameList");
+
+            // Create a new list item and set its content to the entered values
+            const newItem = document.createElement("li");
+            newItem.innerHTML = `<span><strong>Nombre:</strong> ${nameInput.value}</span>
+                                 <span><strong>Dirección:</strong> ${addressInput.value}</span>
+                                 <span><strong>Teléfono:</strong> ${phoneInput.value}</span>`;
+
+            // Create the remove button
+            const removeBtn = document.createElement("button");
+            removeBtn.innerText = "X";
+            removeBtn.classList.add("remove-btn");
+
+            // Append the remove button to the list item
+            newItem.appendChild(removeBtn);
+
+            // Add the new item to the list
+            nameList.appendChild(newItem);
+
+            // Clear the input fields
+            nameInput.value = "";
+            addressInput.value = "";
+            phoneInput.value = "";
+
+            // Add a click event to the remove button to delete the corresponding item
+            removeBtn.addEventListener("click", function() {
+                nameList.removeChild(newItem);
+            });
+        }
+
+        function highlightNames() {
+            const searchInput = document.getElementById("searchName");
+            const nameList = document.getElementById("nameList");
+            const items = nameList.getElementsByTagName("li");
+
+            // Clear any previous highlighting
+            for (let i = 0; i < items.length; i++) {
+                items[i].classList.remove("highlight");
+            }
+
+            let matchFound = false;
+
+            // Iterate through the items and highlight the ones that match the search
+            for (let i = 0; i < items.length; i++) {
+                const name = items[i].getElementsByTagName("span")[0].textContent;
+
+                if (name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+                    items[i].classList.add("highlight");
+                    matchFound = true;
+                }
+            }
+
+            // If no match is found, show an alert
+            if (!matchFound) {
+                alert("No se encontró ninguna coincidencia.");
+            }
+        }
+    </script>
+</body>
+</html>
